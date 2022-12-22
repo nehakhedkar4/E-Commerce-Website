@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %} Product Details {% endblock title %}
 {% block content %}
-
+    
 <div class="container my-5">
     <div class="row">
         {% for p in product_detail %}
@@ -28,7 +28,7 @@
                 <div class="chart text-center me-2">XXL</div>
             </div>
             <div>
-                <a id="add-to-bag" class="btn btn-danger btn-lg" href=""><i class="fa-solid fa-bag-shopping"></i><span>  ADD TO BAG</span></a>
+                <a id="add-to-bag" class="btn btn-danger btn-lg" href="{% url 'add-to-cart' %}"><i class="fa-solid fa-bag-shopping"></i><span>  ADD TO BAG</span></a>
                 <button id="add-to-bag" class="btn btn-outline-secondary px-4"><i class="fa-regular fa-heart"></i> WISHLIST</button><hr>
             </div>
             <h6 style="padding-top: 24px;"><i class="fa-solid fa-truck"></i> DELIVERY OPTIONS</h6>

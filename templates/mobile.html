@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} Mobile {% endblock title %}
+{% block content %}
+
+{% for m in mobiles %}
+
+    <span>{{m.product}}</span>
+
+{% endfor %}
+
+{% endblock %}

@@ -58,13 +58,6 @@ class HomeView(View):
         fashion = Product.objects.filter(category='F')
         print(fashion, "---------------------------------------------------------------")
         today_deals = Product.objects.filter(category='TD')
-        return render(request,'home_page.html',{'fashion': fashion},{'Today_deals': today_deals})
-
-class HomeView(View):
-    def get(self,request):
-        fashion = Product.objects.filter(category='F')
-        print(fashion, "---------------------------------------------------------------")
-        today_deals = Product.objects.filter(category='TD')
         return render(request,'home_page.html',{'fashion': fashion,'Today_deals': today_deals})
 
 def index(request):
@@ -75,12 +68,25 @@ class ProductDetailView(View):
         product_detail = Product.objects.filter(pk=pk)
         return render(request,'product_detail.html',{'product_detail' : product_detail})
 
+# def mobile(request,data=None):
+#     if data == 'Mi' or data == 'Realme' or data == 'Samsung':
+#         mobiles = Product.objects.filter(category='M').filter(brand=data)
+#     return render(request,'mobile.html',{'mobiles' : mobiles})
 
+# def mobile(request):
+#     return render(request,'mobile.html')
 
-
-
-
-
+# class MobilView(View):
+#     def get(self,request,data=None):
+#         print(data,"************************************************************************")
+#         if data == 'Mi' or data == 'Realme' or data == 'Samsung':
+#             print(data)
+#             mobiles = Product.objects.filter(category='M').filter(brand=data)
+#             print(mobiles,"mobiles============================================================")
+#         return render(request,'mobile.html',{'mobiles' : mobiles})
+        
+def addToCart(request):
+    return render(request,'addToCart.html')
 
 
 

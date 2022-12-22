@@ -34,3 +34,13 @@
     padding-top: 15px;
     font-family: ui-sans-serif;
 }
+#addToCart{
+    margin-top: 116px;
+    padding: 25px 0px;
+    font-size: smaller
+}
+#offerlist{
+    font-size: smaller;
+    font-weight: 300;
+    padding-top: 14px
+}

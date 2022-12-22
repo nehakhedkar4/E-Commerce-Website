@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} SignUp {% endblock title %}
+{% block content %}
+
+<form method="post">
+    {%csrf_token%}
+    <div class="container col-4 mt-5">
+        <div class="bg-light p-5 rounded">
+            <h1 class="fw-bold mb-3 fs-2">SignUp Here</h1><hr>
+            {% for fm in form %}
+                {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}<br><br>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">SignUp</button><a style="float: right;" href="{% url 'login' %}">Login</a>
+        </div>
+    </div>
+</form>
+
+{% endblock content %}

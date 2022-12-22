@@ -1,0 +1,36 @@
+.dropdown:hover .dropdown-menu{display: block;}
+.dropdown:hover #Ele{color: rgb(238, 37, 63);}
+.dropdown:hover #women{color: cyan}
+.dropdown:hover #kids{color: rgb(233, 233, 15);}
+.dropdown:hover #home{color: rgb(23, 141, 23);}
+.dropdown:hover #profile{color: red;}
+
+
+.chart {
+    border-radius: 24px;
+    border: 1px solid #878886;
+    padding: 5px; 
+    width: 44px;
+    height: 41px;  
+}
+.chart:hover{border-color:red;}
+#add-to-bag{
+    margin: 23px 17px 10px 0px;
+    padding-left: 95px;
+    padding-right: 95px;
+}
+.btn btn-outline-secondary:hover{border-color: red;}
+
+#fstyle{font-family: sans-serif;}
+
+#delivery{font-family: sans-serif;}
+
+#pincode{
+    padding-top: 6px;
+    font-size: smaller;
+    color: #787a76;
+}
+#list{
+    padding-top: 15px;
+    font-family: ui-sans-serif;
+}

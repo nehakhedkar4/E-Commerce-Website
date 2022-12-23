@@ -3,13 +3,13 @@
 {% block title %} SHOPPING BAG {% endblock title %}
 {% block content %}
 
-<div id="addToCart" class="container text-center border-bottom font-monospace" style="margin-top: 116px;">
-    <span class="text-success text-decoration-underline" >BAG</span>
-    <span>------------ADDRESS</span>
-    <span>------------PAYMENT</span>
+<div id="addToCart" class="container text-center border-bottom font-monospace fw-bold" style="margin-top: 116px;">
+    <span class="text-success text-decoration-underline" >BAG </span>------------
+    <span> ADDRESS </span>------------
+    <span> PAYMENT</span>
 </div>
 
-<div class="container d-flex" >
+<div class="container d-flex">
     <div class="col-7 me-3 display-flex border-end">
         <div class="col me-5 border p-4 mt-5">
             <small><strong>Check Delivery time & Services</strong></small>
@@ -51,7 +51,7 @@
             <!-- <span class="fw-bold ms-4">Total Amount<span class="float-end p-2"><i class="fa-solid fa-indian-rupee-sign"></i>255</span></span><br> -->
         <span>Total Amount</span><span class="float-end pe-2"><i class="fa-solid fa-indian-rupee-sign"></i>255</span><br>
         </div>
-        <button id="place-order-btn" class="btn btn-danger">PLACE ORDER</button>
+        <a id="place-order-btn"  class="btn btn-danger" href="{% url 'address' c.pk %}">PLACE ORDER</a>
     </div>
     {% endfor %}
 </div>

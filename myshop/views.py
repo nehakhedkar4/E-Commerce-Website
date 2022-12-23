@@ -63,6 +63,7 @@ class HomeView(View):
 def index(request):
     return render(request,'index.html')
 
+# PRODUCT DETAILS PAGE
 class ProductDetailView(View):
     def get(self,request,pk):
         product_detail = Product.objects.filter(pk=pk)
@@ -85,9 +86,15 @@ class ProductDetailView(View):
 #             print(mobiles,"mobiles============================================================")
 #         return render(request,'mobile.html',{'mobiles' : mobiles})
         
-def addToCart(request):
-    return render(request,'addToCart.html')
+# def addToCart(request):
+#     return render(request,'addToCart.html')
 
+# ADD_TO_CART PAGE
+class AddToCartView(View):
+    def get(self,request,pk):
+        print("inside addtocart-------------------------------------------------------------------",pk )
+        cart_details = Product.objects.filter(pk=pk)
+        return render(request,'addToCart.html',{'cart_details':cart_details})
 
 
 # https://source.unsplash.com/random/1620x880/?weather

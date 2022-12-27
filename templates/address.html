@@ -8,30 +8,32 @@
     <span class="text-success text-decoration-underline" > ADDRESS</span> ------------
     <span>PAYMENT</span>
 </div>
-
+{% for a in address %}
+<input type="hidden" name="addressID" value="{{a.id}}">
 <div class="container d-flex">
     {% for c in cart_details %}
     <div class="col-7 me-3 display-flex border-end">
         <div class="col me-3 p-3 mt-2">
             <span><strong>Select Delivery Address</strong></span>
             <!-- <small class="border border-dark float-end me-3 p-2">ADD NEW ADDRESS</small> -->
-            <small class="btn btn-outline-dark btn-sm float-end me-3">ADD NEW ADDRESS</small>
+            <small class="btn btn-outline-dark btn-sm float-end me-3">ADD NEW ADDRESS</small>{{a.id}}
         </div>
         <div class="container col-11 border shadow p-4 mt-4 me-5">
-            <small class="fw-bold">Username</small>
+            <small class="fw-bold">{{a.name}}</small>
             <div class="text-secondary" style="list-style: none;">
-                <small>Address</small><br>
+                <small>{{a.locality}} {{a.city}} {{a.pincode}} {{a.state}}</small><br>
                 <small>Pay On Delivery available</small>
             </div>   
             <div class="mt-3"> 
                 <a class="btn btn-outline-dark btn-sm me-3" href="">REMOVE</a>
-                <a class="btn btn-outline-dark btn-sm" href="">EDIT</a>
+                <a class="btn btn-outline-dark btn-sm" href="" data-bs-toggle="modal" data-bs-target="#editaddress" >EDIT</a>
+                <!-- <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#editaddress">EDIT</button> -->
             </div>
             
-
         </div>
         <div id="address" class="container col-11 p-4 mt-4 me-5">
-            <a class="link-danger fw-bold p-4 mt-5" href=""><small style="padding-right:273px">+ Add New Address</small></a>
+            <a class="link-danger fw-bold p-4 mt-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href=""><small style="padding-right:273px">+ Add New Address</small></a>
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Launch static backdrop modal</button> -->
         </div>
     </div>
 
@@ -54,31 +56,72 @@
     </div>
     {% endfor %}
 </div>
-<!-- Modalllllllllll -->
 
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Launch static backdrop modal
-  </button> -->
   
-  <!-- Modal -->
-  <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <!--ADD Address Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <h5 class="modal-title text-secondary" id="staticBackdropLabel">ADD NEW ADDRESS</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+          <form action="" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
+          <button class="btn btn-danger" name="add">Save</button>
         </div>
+        </form>
       </div>
     </div>
-  </div> -->
+  </div>
+  
+<!-- Edit Modal -->
+<div class="modal fade" id="editaddress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title text-secondary" id="staticBackdropLabel">EDIT ADDRESS</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" value="{{a.name}}"><p></p>
+                </div>
+                <div class="form-group">
+                    <label for="locality">Locality</label>
+                    <input type="text" class="form-control" id="locality" aria-describedby="emailHelp" value="{{a.locality}}"><p></p>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" aria-describedby="emailHelp" value="{{a.city}}"><p></p>
+                </div>
+                <div class="form-group">
+                    <label for="pincode">Pincode</label>
+                    <input type="number" class="form-control" id="pincode" aria-describedby="emailHelp" value="{{a.pincode}}"><p></p>
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                </div>
+                <!-- <input type="hidden" name="addressID" value="{{a.id}}"> -->
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button class="btn btn-danger" name="edit">Save changes</button>
+        </div>
+        </div>
+    </form>
+
+    </div>
+    </div>
+    {% endfor %}
 
 
 {% endblock%}

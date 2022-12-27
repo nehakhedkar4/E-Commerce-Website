@@ -27,6 +27,13 @@
                 <div class="chart text-center me-2">XL</div>
                 <div class="chart text-center me-2">XXL</div>
             </div>
+
+            <!-- <form action="/cart" method="post">
+                <input type="hidden" name="product_id" value="{{p.id}}">
+                <button id="add-to-bag" class="btn btn-danger btn-lg">ADD TO BAG</button>
+            </form> -->
+
+
             <div>
                 <a id="add-to-bag" class="btn btn-danger btn-lg" href="{% url 'cart' p.pk %}"><i class="fa-solid fa-bag-shopping"></i><span>  ADD TO BAG</span></a>
                 <button id="add-to-bag" class="btn btn-outline-secondary px-4"><i class="fa-regular fa-heart"></i> WISHLIST</button><hr>

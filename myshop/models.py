@@ -9,6 +9,9 @@ class customer(models.Model):
     pincode = models.IntegerField()
     state = models.CharField(max_length=18)
 
+    def __str__(self):
+        return self.name
+
 Category_choice = (
     ('EL','Electronics'),
     ('M','Mobiles'),
@@ -51,9 +54,9 @@ class OrderPlaced(models.Model):
 
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    customer = models.ForeignKey(customer,on_delete=models.CASCADE)
+    # customer = models.ForeignKey(customer,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    Quantity = models.PositiveIntegerField()
+    Quantity = models.PositiveIntegerField(default=1)
 
     class Meta:
         verbose_name_plural = 'Cart'

@@ -2,10 +2,12 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .forms import SignUpForm
+from .forms import SignUpForm,AddressForm
 from django.contrib.auth import authenticate,login,logout
-from .models import Product
+from .models import Product,customer,Cart
 from django.views import View
+from django.views.generic.edit import CreateView,DeleteView,UpdateView
+
 
 # SIGNUP 
 def signup(request):
@@ -45,8 +47,8 @@ def user_login(request):
         if user is not None:
             print(user)
             login(request, user)
-            # return redirect('')
-            return HttpResponse("you are logged in")
+            return redirect('home')
+            # return HttpResponse("you are logged in")
         print(user)
         messages.info(request,'Invalid User')
         return redirect('/login/')
@@ -61,7 +63,8 @@ class HomeView(View):
         return render(request,'home_page.html',{'fashion': fashion,'Today_deals': today_deals})
 
 def index(request):
-    return render(request,'index.html')
+    form = AddressForm()
+    return render(request,'index.html',{'form':form})
 
 # PRODUCT DETAILS PAGE
 class ProductDetailView(View):
@@ -90,31 +93,92 @@ class ProductDetailView(View):
 # ADD_TO_CART PAGE
 class AddToCartView(View):
     def get(self,request,pk):
-        print("inside addtocart-------------------------------------------------------------------",pk )
+        # print("inside addtocart-------------------------------------------------------------------",pk )
+        user = request.user
         cart_details = Product.objects.filter(pk=pk)
+        product = Product.objects.get(id=pk)
+        print(product)
+        # Cart(user=user,product=product).save()
+        # cart_details = Cart.objects.all()
         return render(request,'addToCart.html',{'cart_details':cart_details})
 
 
 
 # ADD_TO_CART PAGE
-class AddressView(View):
-    def get(self,request,pk):
-        print("inside address------------------------------------------------------------------",pk )
-        cart_details = Product.objects.filter(pk=pk)
-        return render(request,'address.html',{'cart_details':cart_details})
+# class AddressView(View):
+    
+#     def get(self,request,pk):
+#         print("inside address------------------------------------------------------------------" )
+#         cart_details = Product.objects.filter(pk=pk)
+
+#         # ADDRESS FORM
+#         fm = AddressForm()
+#         address = customer.objects.all()
+
+#         # EDIT ADDRESS
+#         # data = customer.objects.get(pk=pk)
+#         # edit_f = customer(instance=data)
+#         return render(request,'address.html',{'cart_details':cart_details,'form':fm,'address':address,})
+    
+#     def post(self,request,pk):
+#         print('Post')
+#         fm = AddressForm(request.POST)
+#         user = request.user
+#         print(user,"------------------------------------------------")
+#         name = request.POST['name']
+#         locality = request.POST['locality']
+#         city = request.POST['city']
+#         pincode = request.POST['pincode']
+#         state = request.POST['state']
+#         if fm.is_valid():
+#             a = customer.objects.create(user=user,name=name,locality=locality,city=city,pincode=pincode,state=state)
+#             # a.save()
+#             # print("save address")
+#             return render(request,'address.html')
 
 
+def address(request,pk):
+    cart_details = Product.objects.filter(pk=pk)
 
-# https://source.unsplash.com/random/1620x880/?weather
+    # ADDRESS FORM
+    fm = AddressForm()
+    address = customer.objects.all()
+
+    # EDIT ADDRESS
+    address_id = request.GET.get('addressID')
+    # address_id = request.GET['addressID']
+    print("address id--------------------------- ",address_id)
+    # data = customer.objects.get(pk=pk)
+    # edit_f = customer(instance=data)
+
+    if 'add' in request.POST:
+        fm = AddressForm(request.POST)
+        user = request.user
+        print(user,"------------------------------------------------")
+        name = request.POST['name']
+        locality = request.POST['locality']
+        city = request.POST['city']
+        pincode = request.POST['pincode']
+        state = request.POST['state']
+        if fm.is_valid():
+            a = customer.objects.create(user=user,name=name,locality=locality,city=city,pincode=pincode,state=state)
+            a.save()
+            print("save address")
+            return redirect('/address/')
+    elif 'edit' in request.POST:
+        print('in else=========================================================')
+        # address_id = request.POST['addressID']
+        # print("name--------------------------- ",address_id)
+        # data = customer.objects.get(pk=address_id)
 
 
+    return render(request,'address.html',{'cart_details':cart_details,'form':fm,'address':address,})
 
 
-
-
-
-
-
+# LOG OUT BY USER
+def user_logout(request):
+    logout(request)
+    return render(request,'home_page.html')
 
 
 

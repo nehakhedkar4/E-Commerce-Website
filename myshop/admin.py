@@ -15,4 +15,4 @@ class UserRegistration(admin.ModelAdmin):
 
 @admin.register(models.Cart)
 class UserRegistration(admin.ModelAdmin):
-    list_display = ('id','user','customer','product','Quantity')
+    list_display = ('id','user','product','Quantity')

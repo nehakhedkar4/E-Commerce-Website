@@ -150,13 +150,12 @@
                             <i class="fa fa-search"></i>
                     </span>
                 </div>
+                {% if request.user.is_authenticated %}
                 <div class="row text-center me-4">
                     <div class="col dropdown">
-                        <span class="fa-regular fa-user h6" id="profile"></span><span id="profile">Profile</span>
-                        <ul class="dropdown-menu p-5">
-                            <li class="text-dark fw-bold">Welcome</li>
-                            <li>To access account and manage orders</li>
-                            <li><a class="dropdown-item text-danger fw-bold border border-danger "  href="{% url 'login' %}">LOGIN / SIGNUP</a></li>
+                        <span class="fa-regular fa-user h6" id="profile"></span><small id="profile">Profile</small>
+                        <ul class="dropdown-menu" style= "padding: 23px 83px 3px 32px">
+                            <li class="text-dark fw-bold text-capitalize">Hello {{request.user}}</li><hr>
                             <li><a class="dropdown-item" href="#">Orders</a></li>
                             <li><a class="dropdown-item" href="#">Wishlist</a></li>
                             <li><a class="dropdown-item" href="#">Gift Cards</a></li>
@@ -166,19 +165,42 @@
                             <li><a class="dropdown-item" href="#">Saved Cards</a></li>
                             <li><a class="dropdown-item" href="#">Saved VPA</a></li>
                             <li><a class="dropdown-item" href="#">Saved Addresses</a></li>
+                            <li><hr><a class="dropdown-item" href="">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                           </ul>
                     </div>
                 </div>
                 <div class="row text-center me-4">
-                    <div class="col dropdown">
-                        <span class="fa-regular fa-heart h6"></span>Wishlist
+                    <div class="col dropdown" style="margin-left: 22px;">
+                        <small class="fa-regular fa-heart h6"></small>Wishlist
                     </div>
                 </div>
                 <div class="row text-center me-4">
-                    <div class="col dropdown">
-                        <span class="fa-solid fa-bag-shopping h6"></span>Bag
+                    <div class="col dropdown" style="margin-left: 22px;" >
+                        <small class="fa-solid fa-bag-shopping h6"></small>Bag
                     </div>
                 </div>
+                {% else %}
+                <div class="row text-center me-4">
+                    <div class="col dropdown">
+                        <span class="fa-regular fa-user h6" id="profile"></span><small id="profile">Profile</small>
+                        <ul class="dropdown-menu" style= "padding: 23px 83px 3px 32px; right: 0; left: auto;">
+                            <li class="text-dark fw-bold">Welcome</li>
+                            <li><small class="d-inline">To access account and manage orders</small></li>
+                            <li><a class="dropdown-item text-danger fw-bold border border-danger "  href="{% url 'login' %}">LOGIN / SIGNUP</a></li>
+                            <li><a class="dropdown-item" href="#">Orders</a></li>
+                            <li><a class="dropdown-item" href="#">Wishlist</a></li>
+                            <li><a class="dropdown-item" href="#">Gift Cards</a></li>
+                            <li><a class="dropdown-item" href="#">Contact Us</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Coupons</a></li>
+                            <li><a class="dropdown-item" href="#">Saved Cards</a></li>
+                            <li><a class="dropdown-item" href="#">Saved VPA</a></li>
+                            <li><a class="dropdown-item" href="#">Saved Addresses</a></li>
+                          </ul>
+                    </div>
+                </div>
+                {% endif %}
             </form>
           </div>
         </div>

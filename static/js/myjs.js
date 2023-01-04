@@ -23,3 +23,7 @@ $('.owl-carousel').owlCarousel({
     }
 })
 console.log("inside")
+// $('.qty').on('click', function(e){
+//     e.preventDefault();
+//     $(this).css('border-color', 'red');
+//   });

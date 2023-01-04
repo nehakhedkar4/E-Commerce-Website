@@ -11,8 +11,8 @@ class UserRegistration(admin.ModelAdmin):
 
 @admin.register(models.OrderPlaced)
 class UserRegistration(admin.ModelAdmin):
-    list_display = ('id','user','customer','product','Quantity','ordered_date','status')
+    list_display = ('id','user','customer','product','quantity','ordered_date','status')
 
 @admin.register(models.Cart)
 class UserRegistration(admin.ModelAdmin):
-    list_display = ('id','user','product','Quantity')
+    list_display = ('id','user','product','quantity')

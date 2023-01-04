@@ -28,15 +28,18 @@
                 <div class="chart text-center me-2">XXL</div>
             </div>
 
-            <!-- <form action="/cart" method="post">
+            <!-- <form action="addToCart/" class="d-inline">
                 <input type="hidden" name="product_id" value="{{p.id}}">
-                <button id="add-to-bag" class="btn btn-danger btn-lg">ADD TO BAG</button>
-            </form> -->
+                <button id="add-to-bag" class="btn btn-danger btn-lg"><i class="fa-solid fa-bag-shopping"></i> ADD TO BAG</button>
+            </form>
+            <button id="add-to-bag" class="btn btn-outline-secondary px-4"><i class="fa-regular fa-heart"></i> WISHLIST</button><hr> -->
+            <div>
+                <a id="add-to-bag" class="btn btn-danger btn-lg" href="{% url 'addToCart' p.pk %}"><i class="fa-solid fa-bag-shopping"></i><span>  ADD TO BAG</span></a>
+                <button id="add-to-bag" class="btn btn-outline-secondary px-4"><i class="fa-regular fa-heart"></i> WISHLIST</button><hr> 
 
+            </div>
 
             <div>
-                <a id="add-to-bag" class="btn btn-danger btn-lg" href="{% url 'cart' p.pk %}"><i class="fa-solid fa-bag-shopping"></i><span>  ADD TO BAG</span></a>
-                <button id="add-to-bag" class="btn btn-outline-secondary px-4"><i class="fa-regular fa-heart"></i> WISHLIST</button><hr>
             </div>
             <h6 style="padding-top: 24px;"><i class="fa-solid fa-truck"></i> DELIVERY OPTIONS</h6>
             <div class="col-6">

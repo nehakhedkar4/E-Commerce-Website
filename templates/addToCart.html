@@ -3,8 +3,9 @@
 {% block title %} SHOPPING BAG {% endblock title %}
 {% block content %}
 
-<div id="addToCart" class="container text-center border-bottom font-monospace fw-bold" style="margin-top: 116px;">
-    <span class="text-success text-decoration-underline" >BAG</span> ------------
+<div id="addToCart" class="container text-center border-bottom font-monospace
+    fw-bold" style="margin-top: 116px;">
+    <span class="text-success text-decoration-underline">BAG</span> ------------
     <span> ADDRESS </span>------------
     <span> PAYMENT</span>
 </div>
@@ -13,7 +14,8 @@
     <div class="col-7 me-3 display-flex border-end">
         <div class="col me-5 border p-4 mt-5">
             <small><strong>Check Delivery time & Services</strong></small>
-            <small class="border border-danger float-end me-3 p-2 text-danger">Enter Pin Code</small>
+            <small class="border border-danger float-end me-3 p-2 text-danger">Enter
+                Pin Code</small>
         </div>
         <div class="col me-5 border p-4 mt-1">
             <small><strong>Available Offers</strong></small>
@@ -25,35 +27,154 @@
                 <li>10% instant Discount on IDFC FIRST Bank Credit and Debit Cards on a min spend of Rs 25,000. TCA</li>
             </div>
         </div>
+        {% for c in cart_items %}
         <div class="row mt-3 border me-5 p-4 ms-1">
-            {% for c in cart_details %}
             <div class="col-3">
-                <img src="{{c.image.url}}" alt="" class="img-fluid img-thumbnail" style="height: 180px;">
+                <img src="{{c.product.image.url}}" alt="" class="img-fluid
+                    img-thumbnail" style="height: 180px;">
             </div>
             <div class="col p-3">
                 <span class="fw-bold">{{ c.product }}</span><br>
-                <span class="fw-lighter">{{c.description}}</span><br>
-                <small><i class="fa-solid fa-indian-rupee-sign"></i> {{c.discount_price}}</small><br>
-                <span class="pe-3" style="font-family: fangsong">Quantity:  <i class="fa-solid fa-square-minus pe-3"></i>ghuk</span><i class="fa-solid fa-square-plus"></i><br>
-                <button class="btn btn-secondary btn-sm mt-2">Remove item</button>
+                <span class="fw-lighter">{{c.product.description}}</span><br>
+                <small><i class="fa-solid fa-indian-rupee-sign"></i>
+                    {{c.product.discount_price}}</small>
+                <small class="text-decoration-line-through text-secondary"><i
+                        class="fa-solid fa-indian-rupee-sign "></i>
+                    {{c.product.selling_price}}</small><br>
+                <!-- <span class="pe-3" style="font-family: fangsong">Quantity:  <i class="fa-solid fa-square-minus pe-3"></i>{{c.quantity}}</span><i class="fa-solid fa-square-plus"></i><br> -->
+                
+                
+                
+                
+                    
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="+" name="plus">
+                    <span>{{c.quantity}}</span>
+                    <input type="hidden" name="cartid" value="{{c.id}}">
+                    <input type="submit" value="-" name="minus">
+                </form>
+
+
+
+    
+                
+                
+                
+                
+                
+                <form method="post">
+
+                <span class="pe-1 dropdown dropdown-toggle" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="font-family: fangsong">Qty {{c.quantity}}</span>
+                
+                <input type="hidden" name="cart_id" value="{{c.id}}">
+
+
+
+<!-- Modal for Qty-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-0" style="margin-right:133px;">
+            <div class="modal-header">
+                <h1 class="modal-title fs-6 fw-bold mx-4 my-3"
+                    id="staticBackdropLabel">Select Quantity</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body mx-4">
+                <!-- <form method="post"> -->
+                    {% csrf_token %}
+                    <!-- <div class="d-flex">
+                    <div class="qty text-center me-3 mb-3">1</div>
+                    <div class="qty text-center me-3 mb-3">2</div>
+                    <div class="qty text-center me-3 mb-3">3</div>
+                    <div class="qty text-center me-3 mb-3">4</div>
+                    <div class="qty text-center me-3 mb-3">5</div>
+                </div>
+                <div class="d-flex">
+                    <div class="qty text-center me-3 mb-3">6</div>
+                    <div class="qty text-center me-3 mb-3">7</div>
+                    <div class="qty text-center me-3 mb-3">8</div>
+                    <div class="qty text-center me-3 mb-3">9</div>
+                    <div class="qty text-center me-3 mb-3">10</div>
+                </div> -->
+                    <input type="hidden" name="cart_item_id" value="{{c.id}}">
+                    {{c.id}}
+                    <div class="d-flex">
+                        <input class="qty btn btn-outline-danger me-3 mb-3" type="submit" value="1" name="1">
+                        <input class="qty btn btn-outline-danger me-3 mb-3"
+                            type="submit" value="2" name="2">
+                        <input class="qty btn btn-outline-danger me-3 mb-3"
+                            type="submit" value="3" name="3">
+                        <input class="qty btn btn-outline-danger me-3 mb-3"
+                            type="submit" value="4" name="4">
+                        <input class="qty btn btn-outline-danger me-3 mb-3"
+                            type="submit" value="5" name="5">
+                    </div>
+                    <div class="d-flex">
+                        <input class="qty btn btn-outline-danger me-3 mb-3 "
+                            type="submit" value="6" name="6">
+                        <input class="qty btn btn-outline-danger me-3 mb-3 "
+                            type="submit" value="7" name="7">
+                        <input class="qty btn btn-outline-danger me-3 mb-3 "
+                            type="submit" value="8" name="8">
+                        <input class="qty btn btn-outline-danger me-3 mb-3 "
+                            type="submit" value="9" name="9">
+                        <input class="qty btn btn-outline-danger me-3 mb-3 "
+                            type="submit" value="10" name="10">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-danger w-100">DONE</button> -->
             </div>
         </div>
-   
+    </div>
+</div>
+
+
+
+
+
+
+                <form action="addtoCart/" method="get">
+                    {% csrf_token %}
+                    <button class="btn btn-secondary btn-sm mt-2">Remove item</button>
+                </form>
+                <!-- <a class="btn btn-secondary btn-sm mt-2" href="{% url 'delete' c.pk %}">Remove item</a> -->
+            </div>
+        </div>
+        {% endfor %}
+
+
     </div>
     <div class="col border text-secondary" style="margin: 48px 6px 215px 32px">
         <div class="mt-3">
             <small class="fw-bold ms-4">PRICE DETAILS(1 item)</small><hr>
         </div>
-        <small class="ms-4">Total MRP</small><small class="float-end pe-2"><i class="fa-solid fa-indian-rupee-sign"></i>{{c.discount_price}}</small><br>
-        <small class="ms-4">Coupon Discount</small><small class="text-danger float-end pe-2">Appy Coupon</small><br>
-        <small class="ms-4">Convenience Fee <span class="text-danger fw-bold"> Know More</span></small><small class="float-end pe-2"><i class="fa-solid fa-indian-rupee-sign"></i>99</small><br><hr>
+        <small class="ms-4">Total MRP</small><small class="float-end pe-2"><i
+                class="fa-solid fa-indian-rupee-sign"></i>{{selling_price}}</small><br>
+        <small class="ms-4">Discount on MRP</small><small class="float-end pe-2
+            text-success"><i class="fa-solid fa-indian-rupee-sign">-</i>{{discount_on_MRP}}</small><br>
+        <small class="ms-4">Coupon Discount</small><small class="text-danger
+            float-end pe-2">Appy Coupon</small><br>
+        <small class="ms-4">Convenience Fee <span class="text-danger fw-bold">
+                Know More</span></small><small class="float-end pe-2
+            text-success"><i class="fa-solid fa-indian-rupee-sign"></i>99</small><br><hr>
         <div class="ms-4 fw-bold">
             <!-- <span class="fw-bold ms-4">Total Amount<span class="float-end p-2"><i class="fa-solid fa-indian-rupee-sign"></i>255</span></span><br> -->
-        <span>Total Amount</span><span class="float-end pe-2"><i class="fa-solid fa-indian-rupee-sign"></i>255</span><br>
+            <span>Total Amount</span><span class="float-end pe-2"><i
+                    class="fa-solid fa-indian-rupee-sign"></i>{{total_amount}}</span><br>
         </div>
-        <a id="place-order-btn"  class="btn btn-danger" href="{% url 'address' c.pk %}">PLACE ORDER</a>
+        <a id="place-order-btn" class="btn btn-danger" href="{% url 'address'
+            %}">PLACE ORDER</a>
     </div>
-    {% endfor %}
 </div>
+
+
+
+
 
 {% endblock %}

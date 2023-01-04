@@ -37,7 +37,7 @@ class OrderPlaced(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     customer = models.ForeignKey(customer,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    Quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField()
     ordered_date = models.DateField(auto_now_add=True)
 
     select = [
@@ -56,7 +56,7 @@ class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     # customer = models.ForeignKey(customer,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    Quantity = models.PositiveIntegerField(default=1)
+    quantity = models.PositiveIntegerField(default=1)
 
     class Meta:
         verbose_name_plural = 'Cart'
